@@ -36,19 +36,22 @@ Live screenshots are optional, but they make the project stand out in a portfoli
 
 Suggested capture set:
 
-| Screen | Recommended file | What to show |
-| --- | --- | --- |
-| Movies | `docs/screenshots/movies.png` | Popular list, search field, poster cards. |
-| Details | `docs/screenshots/details.png` | Backdrop, poster hero, metadata, favourite button. |
-| Favourites | `docs/screenshots/favourites.png` | Saved movies and remove action. |
-| Demo clip | `docs/screenshots/demo.mp4` | Search, open details, add/remove favourite. |
+| Screen | Recommended file                     | What to show |
+| --- |--------------------------------------| --- |
+| Movies | `docs/screenshots/movies_light.png`  | Popular list, search field, poster cards. |
+| Details | `docs/screenshots/details_light.png` | Backdrop, poster hero, metadata, favourite button. |
+| Favourites | `docs/screenshots/fav_light.png`     | Saved movies and remove action. |
+| Demo clip | `docs/screenshots/demo.mp4`          | Search, open details, add/remove favourite. |
 
 After adding screenshots, include them near this section:
 
 ```md
-![Movies screen](docs/screenshots/movies.png)
-![Movie details](docs/screenshots/details.png)
-![Favourites screen](docs/screenshots/favourites.png)
+![Movies screen](docs/screenshots/movies_light.png)
+![Movies screen](docs/screenshots/movies_dark.png)
+![Movie details](docs/screenshots/details_light.png)
+![Movie details](docs/screenshots/details_dark.png)
+![Favourites screen](docs/screenshots/fav_light.png)
+![Favourites screen](docs/screenshots/fav_dark.png)
 ```
 
 ## Tech Stack
