@@ -45,14 +45,14 @@ Suggested capture set:
 
 After adding screenshots, include them near this section:
 
-```md
+
 ![Movies screen](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/movies_light.png)
 ![Movies screen](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/movies_dark.png)
 ![Movie details](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/details_light.png)
 ![Movie details](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/details_dark.png)
 ![Favourites screen](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/fav_light.png)
 ![Favourites screen](https://github.com/ptozcode-tech/tmdb_test/blob/master/docs/screenshots/fav_dark.png)
-```
+
 
 ## Tech Stack
 
