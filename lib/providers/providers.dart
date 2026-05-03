@@ -56,7 +56,9 @@ class ThemeNotifier extends StateNotifier<ThemeModeOption> {
   }
 }
 
-final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeModeOption>((ref) {
+final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeModeOption>((
+  ref,
+) {
   return ThemeNotifier();
 });
 
@@ -100,7 +102,9 @@ class MoviesState {
 }
 
 // Movies Provider
-final moviesProvider = StateNotifierProvider<MoviesNotifier, MoviesState>((ref) {
+final moviesProvider = StateNotifierProvider<MoviesNotifier, MoviesState>((
+  ref,
+) {
   final api = ref.watch(tmdbApiProvider);
   return MoviesNotifier(api);
 });
@@ -166,9 +170,10 @@ final searchMoviesProvider = FutureProvider<List<Movie>>((ref) {
 });
 
 // Favourites Provider
-final favouritesProvider = StateNotifierProvider<FavouritesNotifier, List<Movie>>((ref) {
-  return FavouritesNotifier();
-});
+final favouritesProvider =
+    StateNotifierProvider<FavouritesNotifier, List<Movie>>((ref) {
+      return FavouritesNotifier();
+    });
 
 class FavouritesNotifier extends StateNotifier<List<Movie>> {
   FavouritesNotifier() : super([]) {
@@ -183,32 +188,23 @@ class FavouritesNotifier extends StateNotifier<List<Movie>> {
 
   Future<void> _saveFavourites() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonList = state.map((movie) => jsonEncode({
-      'id': movie.id,
-      'title': movie.title,
-      'poster_path': movie.posterPath,
-      'release_date': movie.releaseDate,
-      'vote_average': movie.voteAverage,
-      'overview': movie.overview,
-      'genres': movie.genres,
-    })).toList();
+    final jsonList = state.map((movie) => jsonEncode(movie.toJson())).toList();
     await prefs.setStringList('favourites', jsonList);
   }
 
-  void addFavourite(Movie movie) {
+  Future<void> addFavourite(Movie movie) async {
     if (!state.any((m) => m.id == movie.id)) {
       state = [...state, movie];
-      _saveFavourites();
+      await _saveFavourites();
     }
   }
 
-  void removeFavourite(int id) {
+  Future<void> removeFavourite(int id) async {
     state = state.where((m) => m.id != id).toList();
-    _saveFavourites();
+    await _saveFavourites();
   }
 
   bool isFavourite(int id) {
     return state.any((m) => m.id == id);
   }
 }
-

@@ -26,15 +26,46 @@ class Movie {
       posterPath: json['poster_path'],
       backdropPath: json['backdrop_path'],
       releaseDate: json['release_date'],
-      voteAverage: json['vote_average']?.toDouble() ?? 0.0,
+      voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0,
       overview: json['overview'],
-      genres: (json['genres'] as List<dynamic>?)?.map((g) => g['name'] as String).toList() ?? [],
+      genres: _parseGenres(json['genres']),
     );
   }
 
-  String get posterUrl => posterPath != null ? 'https://image.tmdb.org/t/p/w500$posterPath' : '';
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'release_date': releaseDate,
+      'vote_average': voteAverage,
+      'overview': overview,
+      'genres': genres,
+    };
+  }
 
-  String? get backdropUrl => backdropPath != null ? 'https://image.tmdb.org/t/p/w780$backdropPath' : null;
+  static List<String> _parseGenres(dynamic genresJson) {
+    if (genresJson is! List) return [];
 
-  String get releaseYear => releaseDate.isNotEmpty ? releaseDate.substring(0, 4) : '';
+    return genresJson
+        .map((genre) {
+          if (genre is String) return genre;
+          if (genre is Map<String, dynamic>) return genre['name'] as String?;
+          if (genre is Map) return genre['name']?.toString();
+          return null;
+        })
+        .whereType<String>()
+        .toList();
+  }
+
+  String get posterUrl =>
+      posterPath != null ? 'https://image.tmdb.org/t/p/w500$posterPath' : '';
+
+  String? get backdropUrl => backdropPath != null
+      ? 'https://image.tmdb.org/t/p/w780$backdropPath'
+      : null;
+
+  String get releaseYear =>
+      releaseDate.isNotEmpty ? releaseDate.substring(0, 4) : '';
 }
